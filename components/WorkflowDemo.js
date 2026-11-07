@@ -62,7 +62,7 @@ export default function WorkflowDemo() {
   const doc = documents[docId];
 
   return (
-    <div id="demo" className="border border-rule bg-white">
+    <div id="demo" className="border border-rule bg-surface">
       <div className="px-4 py-3 border-b border-rule flex items-center justify-between text-sm">
         <span className="font-medium">Interactive demo · synthetic data</span>
         <span className="text-xs text-muted font-mono">extraction simulated locally</span>
@@ -90,7 +90,7 @@ export default function WorkflowDemo() {
                   id={f.key}
                   value={f.value}
                   onChange={(e) => updateField(f.key, e.target.value)}
-                  className={`border px-2 py-1 ${f.flagged ? 'border-accent' : 'border-rule'}`}
+                  className={`border px-2 py-1 bg-canvas ${f.flagged ? 'border-accent' : 'border-rule'}`}
                 />
                 <span className="text-xs font-mono text-right">{Math.round(f.confidence * 100)}%</span>
               </div>
