@@ -1,86 +1,54 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ChevronDown, Bot, Database, Cloud, Shield, Users } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 
-const solutions = [
-  { name: 'AI Agents', href: '/solutions#agents', icon: Bot },
-  { name: 'Data Platform', href: '/solutions#data', icon: Database },
-  { name: 'Cloud', href: '/solutions#cloud', icon: Cloud },
-  { name: 'Cybersecurity', href: '/solutions#security', icon: Shield },
-  { name: 'Consulting', href: '/solutions#consulting', icon: Users },
+const links = [
+  { name: 'Product', href: '/product' },
+  { name: 'Solutions', href: '/solutions' },
+  { name: 'Developers', href: '/developers' },
+  { name: 'Company', href: '/company' },
 ];
 
 export default function Header() {
-  const [scrolled, setScrolled] = useState(false);
-  const [megaOpen, setMegaOpen] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', onScroll);
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
+  const [open, setOpen] = useState(false);
 
   return (
-    <header className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${scrolled ? 'bg-navy/70 backdrop-blur-xl border-b border-white/10' : 'bg-transparent'}`}>
-      <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-        <Link href="/" className="text-xl font-semibold tracking-tight flex items-center gap-2">
-          <span className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-cyan-400" />
-          Nexora
+    <header className="sticky top-0 z-40 bg-canvas/90 backdrop-blur border-b border-rule">
+      <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+        <Link href="/" className="flex items-center gap-2">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+            <rect x="1" y="1" width="16" height="16" stroke="#C45C26" strokeWidth="1.5" />
+            <path d="M5 9h8M9 5v8" stroke="#111" strokeWidth="1.5" />
+          </svg>
+          <span className="font-display text-xl">Nexora</span>
         </Link>
 
-        <nav className="hidden lg:flex items-center gap-8 text-sm">
-          <div className="relative" onMouseEnter={() => setMegaOpen(true)} onMouseLeave={() => setMegaOpen(false)}>
-            <button className="flex items-center gap-1 hover:text-white">Solutions <ChevronDown size={14} /></button>
-            <AnimatePresence>
-              {megaOpen && (
-                <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 8 }} className="absolute top-full left-0 mt-2 w-72 glass rounded-xl p-3 shadow-2xl">
-                  {solutions.map((s) => (
-                    <Link key={s.name} href={s.href} className="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/5">
-                      <s.icon size={18} className="text-cyan-400" />
-                      <span>{s.name}</span>
-                    </Link>
-                  ))}
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
-          <Link href="/industries" className="hover:text-white">Industries</Link>
-          <Link href="/about" className="hover:text-white">About</Link>
-          <Link href="/careers" className="hover:text-white">Careers</Link>
-          <Link href="/newsroom" className="hover:text-white">Newsroom</Link>
-          <Link href="/contact" className="hover:text-white">Contact</Link>
+        <nav className="hidden md:flex items-center gap-8 text-sm">
+          {links.map((l) => (
+            <Link key={l.name} href={l.href} className="hover:text-accent">{l.name}</Link>
+          ))}
         </nav>
 
-        <div className="hidden lg:flex items-center gap-3">
-          <Link href="#" className="text-sm px-4 py-2 hover:text-white">Sign in</Link>
-          <Link href="/contact" className="text-sm px-5 py-2 rounded-full bg-gradient-to-r from-indigo-500 to-cyan-400 text-white font-medium hover:opacity-90">
-            Talk to Sales
-          </Link>
-        </div>
+        <Link href="/walkthrough" className="hidden md:inline-block text-sm border border-ink px-4 py-2 hover:bg-ink hover:text-canvas">
+          Request a walkthrough
+        </Link>
 
-        <button className="lg:hidden" onClick={() => setMobileOpen(true)}><Menu size={22} /></button>
+        <button className="md:hidden p-2" onClick={() => setOpen(true)} aria-label="Open menu"><Menu size={22} /></button>
       </div>
 
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 bg-ink z-50 lg:hidden p-6">
-            <button className="absolute top-6 right-6" onClick={() => setMobileOpen(false)}><X size={24} /></button>
-            <nav className="mt-16 flex flex-col gap-6 text-lg">
-              <Link href="/" onClick={() => setMobileOpen(false)}>Home</Link>
-              <Link href="/solutions" onClick={() => setMobileOpen(false)}>Solutions</Link>
-              <Link href="/industries" onClick={() => setMobileOpen(false)}>Industries</Link>
-              <Link href="/about" onClick={() => setMobileOpen(false)}>About</Link>
-              <Link href="/careers" onClick={() => setMobileOpen(false)}>Careers</Link>
-              <Link href="/newsroom" onClick={() => setMobileOpen(false)}>Newsroom</Link>
-              <Link href="/contact" onClick={() => setMobileOpen(false)} className="mt-4 inline-block bg-gradient-to-r from-indigo-500 to-cyan-400 text-white px-6 py-3 rounded-full w-fit">Talk to Sales</Link>
-            </nav>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {open && (
+        <div className="fixed inset-0 bg-canvas z-50 md:hidden" role="dialog">
+          <button className="absolute top-4 right-4 p-2" onClick={() => setOpen(false)} aria-label="Close menu"><X size={22} /></button>
+          <nav className="mt-20 px-6 flex flex-col gap-6 text-lg">
+            {links.map((l) => (
+              <Link key={l.name} href={l.href} onClick={() => setOpen(false)}>{l.name}</Link>
+            ))}
+            <Link href="/walkthrough" onClick={() => setOpen(false)} className="mt-4 border border-ink px-4 py-3 text-center">Request a walkthrough</Link>
+          </nav>
+        </div>
+      )}
     </header>
   );
 }

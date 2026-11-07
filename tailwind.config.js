@@ -4,12 +4,17 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        ink: '#0A0A0F',
-        navy: '#0F172A',
-        accent: { from: '#6366F1', to: '#22D3EE' },
-        soft: '#E5E7EB',
+        canvas: '#F6F3EE',
+        ink: '#111111',
+        muted: '#6B6560',
+        rule: '#E4DED6',
+        accent: '#C45C26',
       },
-      fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+      fontFamily: {
+        display: ['"Instrument Serif"', 'serif'],
+        sans: ['Inter', 'system-ui', 'sans-serif'],
+        mono: ['"IBM Plex Mono"', 'monospace'],
+      },
     },
   },
   plugins: [],

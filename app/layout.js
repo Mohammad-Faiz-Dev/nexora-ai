@@ -3,14 +3,14 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 
 export const metadata = {
-  title: 'Nexora AI | Intelligence, engineered for enterprise',
-  description: 'Premium AI and enterprise technology platform. AI Agents, Data Platform, Cloud, Cybersecurity and Consulting trusted by 400+ global enterprises.',
+  title: 'Nexora — Document workflows for operations teams',
+  description: 'Nexora helps operations teams turn incoming documents into reviewed, traceable workflows. Fictional portfolio demo.',
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className="min-h-screen flex flex-col">
+      <body className="min-h-screen flex flex-col bg-canvas text-ink">
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
