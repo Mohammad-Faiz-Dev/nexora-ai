@@ -5,13 +5,6 @@ import Footer from '../components/Footer';
 export const metadata = {
   title: 'Nexora — Document workflows for operations teams',
   description: 'Nexora helps operations teams turn incoming documents into reviewed, traceable workflows. Fictional portfolio demo.',
-  icons: {
-    icon: [
-      { url: '/favicon.ico', sizes: 'any' },
-      { url: '/icon.svg', type: 'image/svg+xml' },
-    ],
-    apple: '/apple-touch-icon.png',
-  },
 };
 
 export default function RootLayout({ children }) {
