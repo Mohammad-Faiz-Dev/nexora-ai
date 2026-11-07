@@ -4,11 +4,12 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        canvas: '#F6F3EE',
-        ink: '#111111',
-        muted: '#6B6560',
-        rule: '#E4DED6',
-        accent: '#C45C26',
+        canvas: 'var(--canvas)',
+        ink: 'var(--ink)',
+        muted: 'var(--muted)',
+        rule: 'var(--rule)',
+        accent: 'var(--accent)',
+        surface: 'var(--surface)',
       },
       fontFamily: {
         display: ['"Instrument Serif"', 'serif'],
